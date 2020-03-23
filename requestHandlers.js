@@ -2,7 +2,7 @@
 var exec = require('child_process').exec;
 
 
-function start(response) {
+function start(res, postData) {
     console.log("Request handler 'start' was called.");
     
     const body = '<html>'
@@ -20,13 +20,13 @@ function start(response) {
     '</html>';
     
          res.writeHead(200, {"Content-Type": "text/plain"});
-         res.write(stdout);
+         res.write(body);
          res.end();
      }
-     function upload(res) {
+     function upload(res, postData) {
     console.log("Request handler 'upload' was called.");
     res.writeHead(200, {"Content-Type": "text/plain"});
-    res.write('hello upload');
+    res.write("you've sent: " + postData);
     res.end();
 }
     
