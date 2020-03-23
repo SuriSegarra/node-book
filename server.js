@@ -32,7 +32,9 @@ function start(route) {
         var pathname = url.parse(req.url).pathname;
         console.log('request for ' + pathname + 'received') 
         console.log(pathname)
-        
+
+        route(habdle, pathname);
+
         res.writeHead(200, {"Content-type": "text/plain"})
         res.write('hello world')
         res.end()
