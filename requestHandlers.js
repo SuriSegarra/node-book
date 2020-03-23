@@ -19,16 +19,29 @@ function start(res, postData) {
     '</body>'
     '</html>';
     
-         res.writeHead(200, {"Content-Type": "text/plain"});
+         res.writeHead(200, {"Content-Type": "text/html"});
          res.write(body);
          res.end();
      }
-     function upload(res, postData) {
+     function upload(res, req) {
     console.log("Request handler 'upload' was called.");
-    res.writeHead(200, {"Content-Type": "text/plain"});
-    res.write("you've sent: " + 
-    querystring.parse(postData).text)
-    res.end();
+
+    var form = new formidable.IncomingForm();
+    console.log("about to parse");
+    form.pase(req, function(error, fields, files) {
+        console.log("parsing done");
+
+        fs.rename(files.upload.path, "/tmp/test.png", function(error) {
+            if(error) {
+                fs.unlink("/tmp/test.png");
+                fs.rename(files.upload.path, "/tmp/test.png"); 
+            }
+        });
+        res.writeHead(200, {"Content-Type": "text/plain"});
+        res.write("you've sent: " + 
+        querystring.parse(postData).text)
+        res.end();
+    });
 }
 function show(res) {
     console.log("request handler 'show' was called");
