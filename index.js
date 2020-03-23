@@ -1,10 +1,10 @@
 //starting out HTTP here, although(a pesar de que) the code for the server is still in our server.js
 
-var server = require('./server');
-var router = require('./router');
-var requestHandlers = require('./requestHandlers');
+const server = require("./server");
+const router = require("./router");
+const requestHandlers = require("./requestHandlers");
 
-var handle = {};
+const handle = {};
 handle["/"] = requestHandlers.start;
 handle["/start"] = requestHandlers.start;
 handle["/upload"] = requestHandlers.upload;
