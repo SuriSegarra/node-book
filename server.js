@@ -11,15 +11,31 @@
 //      //listen takes a numeric value which indicates the port number our server is going to listen on
 // }).listen(8888);
 
+// var http = require('http');
+
+// function onRequest(req, res) {
+//     console.log('request receivd!');
+//     res.writeHead(200, {"Concept-Type": "text/plain"});
+//     res.write('Hello World');
+//     res.end();
+// }
+
+// http.createServer(onRequest).listen(8888);
+
+// console.log('Server has started');
+
 var http = require('http');
+var url = require('url');
 
-function onRequest(req, res) {
-    console.log('request receivd!');
-    res.writeHead(200, {"Concept-Type": "text/plain"});
-    res.write('Hello World');
-    res.end();
+function start() {
+    function onRequest(req, res) {
+        var pathname = url.parse(request.url).pathname;
+        console.log('request received') 
+        res.writeHead(200, {"Content-type": "text/plain"})
+        res.write('hello world')
+        res.end()
+    }
+    http.createServer(onRequest).listen(8888);
+    console.log('server has started');
 }
-
-http.createServer(onRequest).listen(8888);
-
-console.log('Server has started');
+exports.start = start;
